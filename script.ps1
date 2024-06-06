@@ -16,11 +16,21 @@ if ($lastRunDate -ne $todayDate) {
     Set-Location $repositoryPath
     $todayDate | Out-File $logFile
 
-    $updateMessage = "`nLast update: $todayDate`n"
+    $updateMessage = "# Contribute
+## Usage
+``````
+win + r -> taskschd.msc
+Создать простую задачу  
+Триггер - При запуске компьютера  
+Выберите действие для задачи - Запустить программу  
+Программа или сценарий - <dir>/script.ps1  
+``````
+
+``Last update: $todayDate``"
     $commitMessage = "Automated daily commit: $todayDate"
     
     if (Test-Path $readmePath) {
-        Add-Content -Path $readmePath -Value $updateMessage
+        Set-Content -Path $readmePath -Value $updateMessage
     } else {
         Set-Content -Path $readmePath -Value $updateMessage
     }

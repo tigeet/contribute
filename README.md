@@ -8,4 +8,4 @@ win + r -> taskschd.msc
 Программа или сценарий - <dir>/script.ps1  
 ```
 
-`Last update: 2024-06-07`
+`Last update: 2024-06-08`

@@ -1,4 +1,6 @@
-$repositoryPath = "."
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+
+$repositoryPath = $PSScriptRoot
 $branchName = "main"
 $logFile = "./contribute.log"
 $readmePath = './README.md'
@@ -16,17 +18,18 @@ if ($lastRunDate -ne $todayDate) {
     Set-Location $repositoryPath
     $todayDate | Out-File $logFile
 
-    $updateMessage = "# Contribute
+    $updateMessage = @'
+# Contribute
 ## Usage
-``````
-win + r -> taskschd.msc
-Создать простую задачу  
-Триггер - При запуске компьютера  
-Выберите действие для задачи - Запустить программу  
-Программа или сценарий - <dir>/script.ps1  
-``````
+``win + r`` $\to$ ``taskschd.msc``  
+Создать простую задачу 
+Триггер - ``При запуске компьютера``  
+Выберите действие для задачи - ``Запустить программу``  
+Программа или сценарий - ``powershell``  
+Добавить аргументы - ``-File <dir>/script.ps1``  
+## Last update: ``{0}``
+'@ -f $todayDate
 
-``Last update: $todayDate``"
     $commitMessage = "Automated daily commit: $todayDate"
     
     if (Test-Path $readmePath) {
@@ -40,5 +43,3 @@ win + r -> taskschd.msc
     git push origin $branchName
 
 }
-
-Read-Host -Prompt "Press Enter to exit"

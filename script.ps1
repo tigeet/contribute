@@ -40,3 +40,5 @@ win + r -> taskschd.msc
     git push origin $branchName
 
 }
+
+Read-Host -Prompt "Press Enter to exit"
